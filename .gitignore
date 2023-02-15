@@ -1,0 +1,11 @@
+node_modules
+
+#Hardhat files
+cache
+artifacts
+typechain
+deployments/localhost
+
+.env
+.config.json
+yarn-error.log
