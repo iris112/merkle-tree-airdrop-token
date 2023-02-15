@@ -15,7 +15,7 @@ import "hardhat-deploy";
 
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || ''
 
-// import "./hardhat/tasks";
+import "./hardhat/tasks";
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more

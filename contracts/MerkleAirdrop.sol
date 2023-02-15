@@ -9,15 +9,16 @@ import '@openzeppelin/contracts/access/Ownable.sol';
 contract MerkleAirdrop is Ownable {
   using SafeERC20 for IERC20;
 
-  IERC20 private constant token = IERC20(0x59276455177429ae2af1cc62B77AE31B34EC3890);
-
+  IERC20 private immutable token;
   bytes32 public immutable merkleRoot;
+
   //user address -> bool
   mapping(address => bool) public claimed;
 
   event Claimed(address user, uint256 balance);
 
-  constructor(bytes32 _merkleRoot) {
+  constructor(IERC20 _token, bytes32 _merkleRoot) {
+    token = _token;
     merkleRoot = _merkleRoot;
   }
 
@@ -48,7 +49,7 @@ contract MerkleAirdrop is Ownable {
     uint256 _balance,
     bytes32[] memory _merkleProof
   ) private view returns (bool) {
-    bytes32 leaf = keccak256(abi.encodePacked(_to, _balance));
+    bytes32 leaf = keccak256(bytes.concat(keccak256(abi.encode(_to, _balance))));
 
     return MerkleProof.verify(_merkleProof, merkleRoot, leaf);
   }
