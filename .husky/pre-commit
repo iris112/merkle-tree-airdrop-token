@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npx pretty-quick --staged --pattern 'contracts/**/*.sol' --pattern 'deploy/**/*.ts'  --pattern 'test/**/*.ts' --pattern 'tasks/**/*.ts'
